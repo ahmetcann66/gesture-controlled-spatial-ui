@@ -1,0 +1,194 @@
+EL HAREKETLERİYLE SANAL ÇİZİM VE NESNE YERLEŞTİRME SİSTEMİ
+(Tony Stark Tarzı Spatial UI – OpenCV & MediaPipe ile)
+📌 1. Projenin Amacı
+
+Bu projenin amacı, bir web kamerası kullanarak kullanıcının el hareketleriyle sanal nesneler çizmesini, tutmasını, taşımasını ve silmesini sağlayan gerçek zamanlı bir sistem geliştirmektir.
+
+Sistem, Iron Man filmlerindeki Tony Stark’ın holografik arayüzlerine benzer bir Spatial UI (Uzamsal Arayüz) oluşturur.
+
+Bu proje:
+
+Bilgisayarlı görü (Computer Vision)
+
+İnsan–bilgisayar etkileşimi (HCI)
+
+Gesture (el hareketi) tanıma
+alanlarını birleştirir.
+
+🧠 2. Kullanılan Teknolojiler
+Teknoloji	Görevi
+Python	Ana programlama dili
+OpenCV	Kamera, görüntü işleme ve çizim
+MediaPipe	El takibi (21 nokta)
+NumPy	Matematiksel işlemler
+📦 3. Kurulum
+
+Bilgisayara gerekli kütüphaneler:
+
+pip install opencv-python mediapipe numpy
+
+
+Gereksinimler:
+
+Webcam
+
+Python 3.9+
+
+🧩 4. Sistem Mimarisi
+Kamera
+   ↓
+OpenCV video akışı
+   ↓
+MediaPipe el takibi
+   ↓
+21 el noktası (landmarks)
+   ↓
+Parmak & gesture analizi
+   ↓
+State Machine (Durum Makinesi)
+   ↓
+Nesne Sistemi (Stack)
+   ↓
+Ekrana çizim
+
+✋ 5. MediaPipe El Noktaları
+
+Her elde 21 nokta vardır. Önemlileri:
+
+No	Anlamı
+0	Bilek
+4	Baş parmak ucu
+8	İşaret parmağı ucu
+12	Orta parmak ucu
+16	Yüzük parmağı ucu
+20	Serçe parmak ucu
+
+Parmak eklemleri:
+
+İşaret: 6
+
+Orta: 10
+
+Yüzük: 14
+
+Serçe: 18
+
+🧠 6. Parmak Açık mı Kapalı mı?
+
+Bir parmak açık sayılır eğer:
+
+parmak ucu (tip).y  <  parmak eklemi (mcp).y
+
+
+Bu şekilde:
+
+İşaret
+
+Orta
+
+Yüzük
+
+Serçe
+parmaklar kontrol edilir.
+
+Sonuç şu şekilde bir dizi verir:
+
+[baş, işaret, orta, yüzük, serçe]
+
+
+True = açık, False = kapalı
+
+✋ 7. Gesture Tanımları
+Hareket	Anlamı
+Sadece işaret açık	Çizim modu
+Baş + işaret yakın	Tutma (pinch)
+Tüm parmaklar kapalı	Sil / Undo
+El açık	Bekleme
+🧠 8. State Machine (Durum Makinesi)
+
+Sistem şu durumlarda çalışır:
+
+IDLE → DRAW → MOVE → IDLE
+          ↓
+        UNDO
+
+Durum	Anlam
+IDLE	Bekleme
+DRAW	Çizim
+MOVE	Nesne taşıma
+UNDO	Son nesneyi silme
+
+State machine sayesinde yanlışlıkla silme veya taşıma olmaz.
+
+🧱 9. Nesne Sistemi
+
+Tüm çizilen nesneler bir stack içinde tutulur:
+
+objects = []
+
+
+Her nesne:
+
+x, y
+
+
+Undo:
+
+objects.pop()
+
+🧲 10. Nesne Seçme (Tutma)
+
+İşaret parmağına en yakın nesne bulunur.
+Eğer mesafe küçükse nesne tutulur.
+
+🖼️ 11. Çizim Motoru
+
+OpenCV ile her nesne ekrana çizilir.
+
+0–1 arası koordinatlar ekran boyutuna çevrilir.
+
+🎮 12. Kullanıcı Deneyimi
+
+El açık → Bekleme
+
+İşaret parmağı → Çizim
+
+Havaya çiz → Nesne oluşur
+
+Pinch → Nesne tutulur
+
+El hareketi → Nesne taşınır
+
+Yumruk → Son nesne silinir
+
+🧪 13. Bu Sistem Neden Profesyonel?
+
+Bu mimari:
+
+VR
+
+Cerrahi robotlar
+
+Drone kontrol
+
+Askeri simülasyonlar
+
+ile aynı prensiple çalışır.
+
+Bu bir “oyuncak” değil, gerçek bir gesture motorudur.
+
+📄 14. CV İçin
+
+“OpenCV ve MediaPipe kullanarak gerçek zamanlı, el hareketleriyle kontrol edilen uzamsal kullanıcı arayüzü geliştirdim.”
+
+🚀 15. Geliştirilebilir Alanlar
+
+3D nesneler
+
+Z-ekseni
+
+Derinlik kamerası
+
+Robot kolu kontrolü
+
+VR entegrasyonu
