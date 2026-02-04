@@ -1,115 +1,71 @@
-# 🚁 UAV Fleet Command System (CLI)
+# 🖐️ Gesture Controlled Spatial UI (Tony Stark Style)
 
-![Language](https://img.shields.io/badge/Language-C-blue) ![Platform](https://img.shields.io/badge/Platform-Windows%2FLinux-lightgrey) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-V3.3-orange)
+> **Project Description:** This project is a real-time **Spatial User Interface** developed using Python, OpenCV, and MediaPipe. It allows users to create, manipulate, and delete virtual objects using hand gestures, without the need for any physical hardware (keyboard, mouse, or wearable sensors).
 
-## 🎯 Project Purpose
-**UAV Fleet Command System** is a C-based simulation designed to demonstrate the logic behind a **Ground Control Station (GCS)**. The primary goal is to simulate the tactical management of a mixed UAV swarm (**TB2, AKINCI, AKSUNGUR**) in a terminal environment.
+![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat&logo=python)
+![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?style=flat&logo=opencv)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-Hand%20Tracking-orange?style=flat&logo=google)
 
-It simulates critical aerospace software functions:
-* **Black Box (Flight Recorder):** Persistent logging of mission data to text files.
-* **ISR & Radar Logic:** Stochastic target acquisition and locking mechanisms.
-* **Collision Avoidance:** Active altitude scanning to prevent mid-air crashes.
-* **Fire Control (FCS):** Weapon release protocols based on safety locks.
+## 🛠️ Tech Stack
 
-### 📐 System Logic & Architecture
-The following diagram illustrates the core decision-making loop of the software, including the **Safety Interlocks** and **Data Logging** layer.
+| Technology | Version | Description |
+| :--- | :--- | :--- |
+| **Python** | 3.11.x | Core programming language (Selected for MediaPipe compatibility). |
+| **OpenCV** | 4.x | Image processing, camera feed management, and rendering. |
+| **MediaPipe** | 0.10.9 | ML pipeline for real-time 21-point hand landmark detection. |
+| **NumPy** | 1.x | Vector math operations. |
 
-```mermaid
-graph TD
-    Start((Start)) --> Menu{Main Menu}
-    
-    %% Radar & ISR Logic
-    Menu -- 8. Radar Scan --> Radar[Stochastic Sensor Scan]
-    Radar -- Target Found --> Lock[State: TARGET LOCKED]
-    Radar -- Scan Empty --> Unlock[State: NO TARGET]
-    
-    %% Fire Control Logic
-    Menu -- 5. Fire Mission --> CheckLock{Target Locked?}
-    CheckLock -- YES --> Fire[Fire Missile & Update Ammo]
-    CheckLock -- NO --> Deny[⛔ Safety Lock Engaged]
-    
-    %% Navigation & Collision Logic
-    Menu -- 3/4. Altitude --> ColCheck{Collision Check}
-    ColCheck -- Safe --> Move[Update Altitude & Fuel]
-    ColCheck -- Risk --> Block[⛔ Collision Warning]
-    
-    %% Logging Layer
-    Fire -.-> Log[💾 Write to ucus_kayitlari.txt]
-    Move -.-> Log
-    Lock -.-> Log
-    
-    Menu -- 0. Exit --> Stop((Terminate))
-⚙️ Installation
-Prerequisites
-You need a C compiler (GCC) installed on your system.
+---
 
-1. Clone the Repository
-Open your terminal and clone the project files:
+## 🎮 Gestures & Controls
 
-Bash
-git clone [https://github.com/ahmetcann66/UAV-Fleet-Command-CLI.git](https://github.com/ahmetcann66/UAV-Fleet-Command-CLI.git)
-cd UAV-Fleet-Command-CLI
-2. Compile the Code
-Compile the source code using GCC:
+| Gesture | Visual Guide | Function |
+| :--- | :--- | :--- |
+| **👆 Index Finger** | Index finger up. | **Cursor / Hover:** Selects menu items or targets objects. |
+| **👌 Pinch** | Thumb & Index finger touching. | **Grab & Drag:** Moves the selected object in 3D space. |
+| **✌️ Victory (V-Sign)** | Index & Middle fingers up. | **Create:** Spawns the selected shape (Square/Circle) at the finger tip. |
+| **✊ Fist** | All fingers closed. | **Delete (Undo):** Triggers a "Hold-to-Confirm" bar. Deletes the last object when filled. |
 
-Bash
-gcc main.c -o uav_system
-🎮 Usage
-Running the Application
-For Windows:
+---
 
-Bash
-uav_system.exe
-For Linux / macOS:
+## 📂 Project Architecture
 
-Bash
-./uav_system
-Controls
-The system uses a numeric menu interface. Enter the number corresponding to the action:
+The project follows a modular **Object-Oriented Programming (OOP)** structure:
 
-1 Switch UAV: Cycle control between TB2, AKINCI, and AKSUNGUR.
+* `main.py` - **Controller:** Manages the main loop, camera feed, and state machine.
+* `HandTrackingModule.py` - **Sensor:** Wraps MediaPipe functionality to detect hands and gestures.
+* `ObjectManager.py` - **Model:** Manages the state, physics, and rendering of virtual objects.
 
-3 Ascend: Increase altitude by 1000m (Consumes Fuel).
+---
 
-5 FIRE MISSION: Launch ammunition (Requires Radar Lock).
+## 🚀 Installation & Setup
 
-8 RADAR SCAN: Scan the sector for targets (Required before firing).
+1.  **Clone the Repository**
+    ```bash
+    git clone [https://github.com/YOUR_USERNAME/gesture-controlled-spatial-ui.git](https://github.com/YOUR_USERNAME/gesture-controlled-spatial-ui.git)
+    cd gesture-controlled-spatial-ui
+    ```
 
-0 Exit: Close the simulation and save the Black Box logs.
+2.  **Install Dependencies**
+    Ensure you are using Python 3.11.
+    ```bash
+    pip install opencv-python mediapipe numpy
+    ```
 
-🖥️ Example Output / Screenshot
-When you run the system, the CLI provides visual feedback (ASCII Art) and real-time telemetry.
+3.  **Run the Project**
+    Double-click `baslat.bat` or run via terminal:
+    ```bash
+    python main.py
+    ```
 
-Plaintext
-=== UAV FLEET COMMAND SYSTEM (V3.3 - BLACK BOX) ===
+---
 
-       | 
-   ---=|=---
-    \_|^|_/    
-    AKINCI-TIHA
+## 🔮 Future Improvements
+* [ ] Color Picker Menu (RGB Selection)
+* [ ] Save/Load Scene functionality
+* [ ] 3D Object Rendering
 
-Selected UAV: AKINCI (Altitude: 5000m | Ammo: 8) [KILITLI]
----------------------------------------
-1. IHA Degistir
-2. Durum Raporu
-3. Yuksel (+1000m, -5 yakit)
-...
-8. RADAR TARAMASI (ISR Scan)
+---
 
-Seciminiz: 8
-
-[RADAR] Bolge taraniyor... Sinyal araniyor...
-!!! TESPIT: Dusman zirhli araci tespit edildi! Kordinatlar kilitlendi. !!!
-[SYSTEM] ATIS SISTEMI AKTIF.
-
-Seciminiz: 5
-
-*** HEDEF KILITLENDI... FUSELAGE RELEASED ***
->>> AKINCI, 1 adet MAM-C fuzesi atisladi! HEDEF IMHA EDILDI. <<<
-[BILGI] Hedef imha edildi. Radar sifirlandi.
-Black Box Log Output (ucus_kayitlari.txt):
-
-Plaintext
-[03-02-2026 14:30:10] [SISTEM] UAV Fleet Command System V3.3 Baslatildi.
-[03-02-2026 14:31:05] [RADAR] AKINCI RADAR HEDEF TESPIT ETTI.
-[03-02-2026 14:31:12] [ATIS] AKINCI MAM-C ATISLADI. Hedef Vuruldu.
+> **Developer:** Ahmet
+> **License:** MIT
