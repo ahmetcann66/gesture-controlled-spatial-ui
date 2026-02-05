@@ -29,6 +29,8 @@ while True:
     cv2.rectangle(img, (25, 115), (70, 160), (255, 0, 255), cv2.FILLED) 
     cv2.putText(img, "2", (35, 145), cv2.FONT_HERSHEY_PLAIN, 2, (255, 255, 255), 2)
 
+    manager.update_physics()
+
     img = detector.findHands(img)
     lmList = detector.findPosition(img)
 
@@ -41,13 +43,11 @@ while True:
             if 10 < cx < 85 and 10 < cy < 85:
                 manager.set_shape("circle")
                 cv2.rectangle(img, (10, 10), (85, 85), (0, 255, 0), 3) 
-            
             elif 10 < cx < 85 and 100 < cy < 175:
                 manager.set_shape("rectangle")
                 cv2.rectangle(img, (10, 100), (85, 175), (0, 255, 0), 3)
-            
             else:
-                cv2.circle(img, (lmList[8][1], lmList[8][2]), 10, (0, 255, 255), cv2.FILLED)
+                cv2.circle(img, (cx, cy), 10, (0, 255, 255), cv2.FILLED)
 
         if fingers[1] == 1 and fingers[2] == 1 and fingers[3] == 0: 
             if create_cooldown == 0:
@@ -57,11 +57,8 @@ while True:
                     cv2.putText(img, "OLUSTURULDU!", (cx, cy - 20), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2)
 
         is_pinching = length < 40
-        
         if is_pinching and (cx > 100): 
             manager.update_drag(cx, cy, True)
-        elif is_pinching and (cx < 100):
-            pass
         else:
             manager.update_drag(cx, cy, False)
 
@@ -83,10 +80,9 @@ while True:
         create_cooldown -= 1
 
     manager.draw(img)
-
     cv2.putText(img, f"Mod: {manager.current_shape}", (100, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2)
 
-    cv2.imshow("Tony Stark UI - Pro", img)
+    cv2.imshow("Tony Stark UI - Physics Edition", img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
