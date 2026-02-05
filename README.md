@@ -1,6 +1,6 @@
 # 🖐️ Gesture Controlled Spatial UI (Tony Stark Style)
 
-> **Project Description:** This project is a real-time **Spatial User Interface** developed using Python, OpenCV, and MediaPipe. It allows users to create, manipulate, and delete virtual objects using hand gestures, without the need for any physical hardware (keyboard, mouse, or wearable sensors).
+> **Project Description:** This project is a real-time **Spatial User Interface** developed using Python, OpenCV, and MediaPipe. It allows users to create, manipulate, and delete virtual objects using hand gestures. **The system features a built-in Physics Engine, allowing objects to react to gravity, bounce off the floor, and interact with user inputs dynamically.**
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat&logo=python)
 ![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?style=flat&logo=opencv)
@@ -22,8 +22,8 @@
 | Gesture | Visual Guide | Function |
 | :--- | :--- | :--- |
 | **👆 Index Finger** | Index finger up. | **Cursor / Hover:** Selects menu items or targets objects. |
-| **👌 Pinch** | Thumb & Index finger touching. | **Grab & Drag:** Moves the selected object in 3D space. |
-| **✌️ Victory (V-Sign)** | Index & Middle fingers up. | **Create:** Spawns the selected shape (Square/Circle) at the finger tip. |
+| **👌 Pinch** | Thumb & Index finger touching. | **Grab & Drag:** Moves the selected object and **pauses physics** for that object. |
+| **✌️ Victory (V-Sign)** | Index & Middle fingers up. | **Create:** Spawns the selected shape (Square/Circle) which immediately **reacts to gravity**. |
 | **✊ Fist** | All fingers closed. | **Delete (Undo):** Triggers a "Hold-to-Confirm" bar. Deletes the last object when filled. |
 
 ---
@@ -34,7 +34,7 @@ The project follows a modular **Object-Oriented Programming (OOP)** structure:
 
 * `main.py` - **Controller:** Manages the main loop, camera feed, and state machine.
 * `HandTrackingModule.py` - **Sensor:** Wraps MediaPipe functionality to detect hands and gestures.
-* `ObjectManager.py` - **Model:** Manages the state, physics, and rendering of virtual objects.
+* `ObjectManager.py` - **Model:** Manages the state, **physics calculations (gravity, velocity, collision)**, and rendering.
 
 ---
 
@@ -42,7 +42,7 @@ The project follows a modular **Object-Oriented Programming (OOP)** structure:
 
 1.  **Clone the Repository**
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/gesture-controlled-spatial-ui.git](https://github.com/YOUR_USERNAME/gesture-controlled-spatial-ui.git)
+    git clone [https://github.com/ahmetcann66/gesture-controlled-spatial-ui.git](https://github.com/ahmetcann66/gesture-controlled-spatial-ui.git)
     cd gesture-controlled-spatial-ui
     ```
 
@@ -61,6 +61,7 @@ The project follows a modular **Object-Oriented Programming (OOP)** structure:
 ---
 
 ## 🔮 Future Improvements
+* [x] Physics Engine (Gravity & Bounce) ✅
 * [ ] Color Picker Menu (RGB Selection)
 * [ ] Save/Load Scene functionality
 * [ ] 3D Object Rendering
