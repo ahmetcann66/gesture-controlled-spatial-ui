@@ -1,6 +1,6 @@
 # 🖐️ Gesture Controlled Spatial UI (Tony Stark Style)
 
-> **Project Description:** This project is a real-time **Spatial User Interface** developed using Python, OpenCV, and MediaPipe. It allows users to create, manipulate, and delete virtual objects using hand gestures. **The system features a built-in Physics Engine, allowing objects to react to gravity, bounce off the floor, and interact with user inputs dynamically.**
+> **Project Description:** This project is a real-time **Spatial User Interface** developed using Python, OpenCV, and MediaPipe. It allows users to create, manipulate, and delete virtual objects using hand gestures. **The system features a built-in Physics Engine, allowing objects to react to gravity, bounce off walls, and collide with each other using real-time elastic physics.**
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat&logo=python)
 ![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?style=flat&logo=opencv)
@@ -13,7 +13,7 @@
 | **Python** | 3.11.x | Core programming language (Selected for MediaPipe compatibility). |
 | **OpenCV** | 4.x | Image processing, camera feed management, and rendering. |
 | **MediaPipe** | 0.10.9 | ML pipeline for real-time 21-point hand landmark detection. |
-| **NumPy** | 1.x | Vector math operations. |
+| **NumPy** | 1.x | Vector math operations (Essential for physics calculations). |
 
 ---
 
@@ -34,7 +34,7 @@ The project follows a modular **Object-Oriented Programming (OOP)** structure:
 
 * `main.py` - **Controller:** Manages the main loop, camera feed, and state machine.
 * `HandTrackingModule.py` - **Sensor:** Wraps MediaPipe functionality to detect hands and gestures.
-* `ObjectManager.py` - **Model:** Manages the state, **physics calculations (gravity, velocity, collision)**, and rendering.
+* `ObjectManager.py` - **Model:** Manages the state, **physics calculations (gravity, velocity)**, and **Circle-Circle Collision Detection**.
 
 ---
 
@@ -62,6 +62,7 @@ The project follows a modular **Object-Oriented Programming (OOP)** structure:
 
 ## 🔮 Future Improvements
 * [x] Physics Engine (Gravity & Bounce) ✅
+* [x] Object Collision & Elasticity ✅
 * [ ] Color Picker Menu (RGB Selection)
 * [ ] Save/Load Scene functionality
 * [ ] 3D Object Rendering
