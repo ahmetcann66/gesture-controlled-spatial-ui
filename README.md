@@ -1,6 +1,6 @@
 # 🖐️ Gesture Controlled Spatial UI (Tony Stark Style)
 
-> **Project Description:** This project is a real-time **Spatial User Interface** developed using Python, OpenCV, and MediaPipe. It allows users to create, manipulate, and delete virtual objects using hand gestures. **The system features a built-in Physics Engine, allowing objects to react to gravity, bounce off the floor, and interact with user inputs dynamically.**
+> **Project Description:** This project is a real-time **Spatial User Interface** developed using Python, OpenCV, and MediaPipe. It allows users to create, manipulate, and delete virtual objects using hand gestures. **The system features a built-in Physics Engine (Gravity, Collision) and an RGB Color Selection Menu, allowing for dynamic and colorful interaction.**
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat&logo=python)
 ![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?style=flat&logo=opencv)
@@ -13,7 +13,7 @@
 | **Python** | 3.11.x | Core programming language (Selected for MediaPipe compatibility). |
 | **OpenCV** | 4.x | Image processing, camera feed management, and rendering. |
 | **MediaPipe** | 0.10.9 | ML pipeline for real-time 21-point hand landmark detection. |
-| **NumPy** | 1.x | Vector math operations. |
+| **NumPy** | 1.x | Vector math operations (Essential for physics calculations). |
 
 ---
 
@@ -21,9 +21,9 @@
 
 | Gesture | Visual Guide | Function |
 | :--- | :--- | :--- |
-| **👆 Index Finger** | Index finger up. | **Cursor / Hover:** Selects menu items or targets objects. |
+| **👆 Index Finger** | Index finger up. | **Cursor / Hover:** Selects menu items (Shapes & **RGB Colors**) or targets objects. |
 | **👌 Pinch** | Thumb & Index finger touching. | **Grab & Drag:** Moves the selected object and **pauses physics** for that object. |
-| **✌️ Victory (V-Sign)** | Index & Middle fingers up. | **Create:** Spawns the selected shape (Square/Circle) which immediately **reacts to gravity**. |
+| **✌️ Victory (V-Sign)** | Index & Middle fingers up. | **Create:** Spawns the selected shape in the **selected color**. |
 | **✊ Fist** | All fingers closed. | **Delete (Undo):** Triggers a "Hold-to-Confirm" bar. Deletes the last object when filled. |
 
 ---
@@ -32,9 +32,9 @@
 
 The project follows a modular **Object-Oriented Programming (OOP)** structure:
 
-* `main.py` - **Controller:** Manages the main loop, camera feed, and state machine.
+* `main.py` - **Controller:** Manages the main loop, UI elements (Color/Shape Menu), and state machine.
 * `HandTrackingModule.py` - **Sensor:** Wraps MediaPipe functionality to detect hands and gestures.
-* `ObjectManager.py` - **Model:** Manages the state, **physics calculations (gravity, velocity, collision)**, and rendering.
+* `ObjectManager.py` - **Model:** Manages object properties (**Color**, Shape), **physics (Gravity, Collision)**, and rendering.
 
 ---
 
@@ -62,7 +62,8 @@ The project follows a modular **Object-Oriented Programming (OOP)** structure:
 
 ## 🔮 Future Improvements
 * [x] Physics Engine (Gravity & Bounce) ✅
-* [ ] Color Picker Menu (RGB Selection)
+* [x] Object Collision & Elasticity ✅
+* [x] Color Picker Menu (RGB Selection) ✅
 * [ ] Save/Load Scene functionality
 * [ ] 3D Object Rendering
 
