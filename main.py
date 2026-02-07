@@ -29,6 +29,10 @@ while True:
     cv2.rectangle(img, (25, 115), (70, 160), (255, 0, 255), cv2.FILLED) 
     cv2.putText(img, "2", (35, 145), cv2.FONT_HERSHEY_PLAIN, 2, (255, 255, 255), 2)
 
+    cv2.rectangle(img, (10, 200), (85, 275), (0, 0, 255), cv2.FILLED)
+    cv2.rectangle(img, (10, 290), (85, 365), (0, 255, 0), cv2.FILLED)
+    cv2.rectangle(img, (10, 380), (85, 455), (255, 0, 0), cv2.FILLED)
+
     manager.update_physics()
 
     img = detector.findHands(img)
@@ -46,6 +50,15 @@ while True:
             elif 10 < cx < 85 and 100 < cy < 175:
                 manager.set_shape("rectangle")
                 cv2.rectangle(img, (10, 100), (85, 175), (0, 255, 0), 3)
+            elif 10 < cx < 85 and 200 < cy < 275:
+                manager.set_color((0, 0, 255))
+                cv2.rectangle(img, (10, 200), (85, 275), (255, 255, 255), 3)
+            elif 10 < cx < 85 and 290 < cy < 365:
+                manager.set_color((0, 255, 0))
+                cv2.rectangle(img, (10, 290), (85, 365), (255, 255, 255), 3)
+            elif 10 < cx < 85 and 380 < cy < 455:
+                manager.set_color((255, 0, 0))
+                cv2.rectangle(img, (10, 380), (85, 455), (255, 255, 255), 3)
             else:
                 cv2.circle(img, (cx, cy), 10, (0, 255, 255), cv2.FILLED)
 
@@ -81,6 +94,8 @@ while True:
 
     manager.draw(img)
     cv2.putText(img, f"Mod: {manager.current_shape}", (100, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2)
+    cv2.putText(img, "Renk:", (100, 90), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2)
+    cv2.rectangle(img, (200, 65), (240, 95), manager.base_color, cv2.FILLED)
 
     cv2.imshow("Tony Stark UI - Physics Edition", img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
