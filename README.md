@@ -3,7 +3,8 @@
 # 🖐️ Gesture Controlled Spatial UI
 ### ⚡ "The Tony Stark Experience" ⚡
 
-> **A Real-Time, Physics-Enabled Virtual Workspace** > *Create, Manipulate, and Interact with virtual objects using nothing but your hands.*
+> **A Real-Time, Physics-Enabled Virtual Workspace**
+> *Create, Manipulate, and Interact with virtual objects using nothing but your hands.*
 
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![OpenCV](https://img.shields.io/badge/OpenCV-Computer_Vision-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
@@ -43,8 +44,8 @@ graph TD
     D --> I[🎨 Color Picker UI]
     
     subgraph Physics Engine
-    H -->|Gravity & Velocity| J[Physics Update]
-    J -->|Collision Check| K[Bounce & Repel]
+        H -->|Gravity & Velocity| J[Physics Update]
+        J -->|Collision Check| K[Bounce & Repel]
     end
 
     K --> L[🖥️ Render Output]
@@ -55,8 +56,8 @@ graph TD
 ├── 📄 ObjectManager.py       # The World: Physics, Object properties, and Rendering
 ├── 📄 baslat.bat             # Quick Start Script
 └── 📄 README.md              # Documentation
-🎮 Gestures & ControlsGestureVisual RepresentationActionDetails👆 Index[ 0, 1, 0, 0, 0 ]Cursor / SelectUsed to select colors from the menu or hover over objects.👌 PinchDistance(4,8) < 40Grab & DragLocks the object to your hand and pauses physics while holding.✌️ Victory[ 0, 1, 1, 0, 0 ]Create ObjectSpawns a Square or Circle in the selected color.✊ Fist[ 0, 0, 0, 0, 0 ]Delete (Undo)Activates a "Hold-to-Confirm" bar. Deletes the last object when full.🛠️ Tech Stack DetailsComponentLibraryRole in ProjectCore LogicPython 3.11The backbone of the application.VisionOpenCV (cv2)Image processing, drawing shapes, and frame management.AI / MLMediaPipeHigh-fidelity hand landmark detection (21 points).MathNumPyVector calculations for distance and physics.🚀 Getting StartedPrerequisitesPython 3.10 or 3.11 installed.A working webcam.InstallationClone the RepoBashgit clone [https://github.com/ahmetcann66/gesture-controlled-spatial-ui.git](https://github.com/ahmetcann66/gesture-controlled-spatial-ui.git)
+🎮 Gestures & ControlsGestureVisual RepresentationActionDetails👆 Index[ 0, 1, 0, 0, 0 ]Cursor / SelectUsed to select colors from the menu or hover over objects.👌 PinchDistance(4,8) < 40Grab & DragLocks the object to your hand and pauses physics while holding.✌️ Victory[ 0, 1, 1, 0, 0 ]Create ObjectSpawns a Square or Circle in the selected color.✊ Fist[ 0, 0, 0, 0, 0 ]Delete (Undo)Activates a "Hold-to-Confirm" bar. Deletes the last object when full.🛠️ Tech Stack DetailsComponentLibraryRole in ProjectCore LogicPython 3.11The backbone of the application.VisionOpenCV (cv2)Image processing, drawing shapes, and frame management.AI / MLMediaPipeHigh-fidelity hand landmark detection (21 points).MathNumPyVector calculations for distance and physics.🚀 Getting StartedPrerequisitesPython 3.10 or 3.11 installed.A working webcam.InstallationClone the RepoBashgit clone https://github.com/ahmetcann66/gesture-controlled-spatial-ui.git
 cd gesture-controlled-spatial-ui
 Install DependenciesBashpip install opencv-python mediapipe numpy
 Run the AppOption A: Double click baslat.batOption B: Terminal command:Bashpython main.py
-🔮 Roadmap[x] Physics Engine (Gravity & Bounce) ✅[x] Object Collision System ✅[x] RGB Color Picker Menu ✅[ ] Save/Load Scene (JSON)[ ] 3D Object Rendering<div align="center">Developed by Ahmet Licensed under MIT</div>
+🔮 Roadmap[x] Physics Engine (Gravity & Bounce) ✅[x] Object Collision System ✅[x] RGB Color Picker Menu ✅[ ] Save/Load Scene (JSON)[ ] 3D Object Rendering<div align="center">Developed by Ahmet · Licensed under MIT</div>
