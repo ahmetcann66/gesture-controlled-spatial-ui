@@ -1,73 +1,57 @@
-# 🖐️ Gesture Controlled Spatial UI (Tony Stark Style)
+<div align="center">
 
-> **Project Description:** This project is a real-time **Spatial User Interface** developed using Python, OpenCV, and MediaPipe. It allows users to create, manipulate, and delete virtual objects using hand gestures. **The system features a built-in Physics Engine (Gravity, Collision) and an RGB Color Selection Menu, allowing for dynamic and colorful interaction.**
+# 🖐️ Gesture Controlled Spatial UI
+### ⚡ "The Tony Stark Experience" ⚡
 
-![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat&logo=python)
-![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?style=flat&logo=opencv)
-![MediaPipe](https://img.shields.io/badge/MediaPipe-Hand%20Tracking-orange?style=flat&logo=google)
+> **A Real-Time, Physics-Enabled Virtual Workspace** > *Create, Manipulate, and Interact with virtual objects using nothing but your hands.*
 
-## 🛠️ Tech Stack
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-Computer_Vision-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-Hand_Tracking-FFA800?style=for-the-badge&logo=google&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-| Technology | Version | Description |
-| :--- | :--- | :--- |
-| **Python** | 3.11.x | Core programming language (Selected for MediaPipe compatibility). |
-| **OpenCV** | 4.x | Image processing, camera feed management, and rendering. |
-| **MediaPipe** | 0.10.9 | ML pipeline for real-time 21-point hand landmark detection. |
-| **NumPy** | 1.x | Vector math operations (Essential for physics calculations). |
+[Report Bug](https://github.com/ahmetcann66/gesture-controlled-spatial-ui/issues) · [Request Feature](https://github.com/ahmetcann66/gesture-controlled-spatial-ui/issues)
 
----
-
-## 🎮 Gestures & Controls
-
-| Gesture | Visual Guide | Function |
-| :--- | :--- | :--- |
-| **👆 Index Finger** | Index finger up. | **Cursor / Hover:** Selects menu items (Shapes & **RGB Colors**) or targets objects. |
-| **👌 Pinch** | Thumb & Index finger touching. | **Grab & Drag:** Moves the selected object and **pauses physics** for that object. |
-| **✌️ Victory (V-Sign)** | Index & Middle fingers up. | **Create:** Spawns the selected shape in the **selected color**. |
-| **✊ Fist** | All fingers closed. | **Delete (Undo):** Triggers a "Hold-to-Confirm" bar. Deletes the last object when filled. |
+</div>
 
 ---
 
-## 📂 Project Architecture
+## 🌟 Project Highlights
 
-The project follows a modular **Object-Oriented Programming (OOP)** structure:
-
-* `main.py` - **Controller:** Manages the main loop, UI elements (Color/Shape Menu), and state machine.
-* `HandTrackingModule.py` - **Sensor:** Wraps MediaPipe functionality to detect hands and gestures.
-* `ObjectManager.py` - **Model:** Manages object properties (**Color**, Shape), **physics (Gravity, Collision)**, and rendering.
-
----
-
-## 🚀 Installation & Setup
-
-1.  **Clone the Repository**
-    ```bash
-    git clone [https://github.com/ahmetcann66/gesture-controlled-spatial-ui.git](https://github.com/ahmetcann66/gesture-controlled-spatial-ui.git)
-    cd gesture-controlled-spatial-ui
-    ```
-
-2.  **Install Dependencies**
-    Ensure you are using Python 3.11.
-    ```bash
-    pip install opencv-python mediapipe numpy
-    ```
-
-3.  **Run the Project**
-    Double-click `baslat.bat` or run via terminal:
-    ```bash
-    python main.py
-    ```
+* **Physics Engine:** Objects interact with gravity, bounce off the floor, and collide with each other realistically.
+* **RGB Color Picker:** Dynamic UI to select Red, Green, or Blue for your virtual objects.
+* **Zero Hardware:** No VR headsets or gloves required. Just a standard webcam.
+* **Modular OOP Design:** Clean, scalable, and maintainable code architecture.
 
 ---
 
-## 🔮 Future Improvements
-* [x] Physics Engine (Gravity & Bounce) ✅
-* [x] Object Collision & Elasticity ✅
-* [x] Color Picker Menu (RGB Selection) ✅
-* [ ] Save/Load Scene functionality
-* [ ] 3D Object Rendering
+## 🧠 System Architecture
 
----
+This diagram illustrates how data flows from the camera to the physics engine.
 
-> **Developer:** Ahmet
-> **License:** MIT
+```mermaid
+graph TD
+    A[📷 Webcam Feed] -->|Frames| B(✋ HandTrackingModule)
+    B -->|Landmarks| C{🧠 Main Controller}
+    
+    C -- Index Finger --> D[🖱️ Cursor / UI Select]
+    C -- Victory Sign --> E[✨ Create Object]
+    C -- Pinch --> F[✊ Grab & Drag]
+    C -- Fist --> G[🗑️ Delete Logic]
+
+    E & F --> H[🧩 ObjectManager]
+    D --> I[🎨 Color Picker UI]
+    
+    subgraph Physics Engine
+    H -->|Gravity & Velocity| J[Physics Update]
+    J -->|Collision Check| K[Bounce & Repel]
+    end
+
+    K --> L[🖥️ Render Output]
+    I --> L
+gesture-controlled-spatial-ui/
+├── 📄 main.py                # The Brain: Main loop, UI, and State Machine
+├── 📄 HandTrackingModule.py  # The Eyes: MediaPipe wrapper for gesture detection
+├── 📄 ObjectManager.py       # The World: Physics, Object properties, and Rendering
+├── 📄 baslat.bat             # Quick Start Script
+└── 📄 README.md              # Documentation
